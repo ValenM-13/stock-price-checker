@@ -22,17 +22,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Security Middleware
 app.use(helmet());
 
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'"],
-      styleSrc: ["'self'"],
-      imgSrc: ["'self'"]
+app.use((req, res, next) => {
+  res.setHeader(
+    "Content-Security-Policy",
+    "default-src 'self'; script-src 'self'; style-src 'self';"
+  );
+  next();
+});
 
-    }
-  })
-);
+
 
 
 //Index page (static HTML)
