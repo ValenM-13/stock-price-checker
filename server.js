@@ -20,12 +20,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Security Middleware
+app.use(helmet());
+
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'"],
-      styleSrc: ["'self'"]
+      styleSrc: ["'self'"],
+      imgSrc: ["'self'"]
+
     }
   })
 );
