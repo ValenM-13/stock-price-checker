@@ -23,14 +23,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   helmet({
     contentSecurityPolicy: {
+      useDefaults: false,
       directives: {
         defaultSrc: ["'self'"],
         scriptSrc: ["'self'"],
         styleSrc: ["'self'"]
       }
-    }
+    },
+    crossOriginEmbedderPolicy: false
   })
 );
+
 
 
 
