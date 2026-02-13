@@ -19,20 +19,18 @@ app.use(cors({origin: '*'})); //For FCC testing purposes only
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Security Middleware
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'"],
-      styleSrc: ["'self'"],
-    },
-  })
-);
+// Security middleware
 
+app.use(helmet());
 
-
-
+// Set CSP manually to pass FCC test
+app.use((req, res, next) => {
+  res.setHeader(
+    "Content-Security-Policy",
+    "default-src 'self'; script-src 'self'; style-src 'self';"
+  );
+  next();
+});
 
 
 //Index page (static HTML)
