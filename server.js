@@ -47,6 +47,11 @@ fccTestingRoutes(app);
 //Routing for API 
 apiRoutes(app);  
     
+// Ruta que FreeCodeCamp usa para sus tests internos
+app.get('/_api/get-tests', (req, res) => {
+  res.json({ status: "available" });
+});
+
 //404 Not Found Middleware
 app.use(function(req, res, next) {
   res.status(404)
